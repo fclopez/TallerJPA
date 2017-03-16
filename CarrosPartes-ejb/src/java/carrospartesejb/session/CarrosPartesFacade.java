@@ -32,13 +32,18 @@ public class CarrosPartesFacade extends AbstractFacade<CarrosPartes> implements 
 
     @Override
     public boolean insertarCarroParte(String placaCarro, String codigoParte, int cantidad) {
-        CarrosPartesPK pk = new CarrosPartesPK(placaCarro, codigoParte);
-        if(consultarCarrosPartes(pk)!= null){
+        try {
+            CarrosPartesPK pk = new CarrosPartesPK(placaCarro, codigoParte);
+            if (consultarCarrosPartes(pk) != null) {
+                return false;
+            } else {
+                CarrosPartes cp = new CarrosPartes(pk, cantidad);
+                em.persist(cp);
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println(e);
             return false;
-        }else{
-            CarrosPartes cp = new CarrosPartes(pk,cantidad);
-            em.persist(cp);
-            return true;
         }
     }
 

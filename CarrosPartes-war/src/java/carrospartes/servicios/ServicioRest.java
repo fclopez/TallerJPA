@@ -7,6 +7,8 @@ package carrospartes.servicios;
 
 //import javax.ws.rs.core.Context;
 //import javax.ws.rs.core.UriInfo;
+import carrospartesejb.entity.Carros;
+import javax.ejb.EJB;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
@@ -15,6 +17,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import carrospartesejb.session.CarrosFacadeLocal;
+import java.util.List;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
 
 /**
  * REST Web Service
@@ -23,15 +29,21 @@ import javax.ws.rs.core.Response;
  */
 
 @Path("/serviciorest")
+@Stateless
+@LocalBean
 public class ServicioRest {
 
 //    @Context
 //    private UriInfo context;
 
-    /**
-     * Creates a new instance of ServicioRest
-     */
-    public ServicioRest() {
+    @EJB
+    private CarrosFacadeLocal gestionCarros;
+    
+    @GET
+    @Path("/consultaCarros")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<Carros> buscarCarros(){
+        return gestionCarros.findAll();
     }
 
     

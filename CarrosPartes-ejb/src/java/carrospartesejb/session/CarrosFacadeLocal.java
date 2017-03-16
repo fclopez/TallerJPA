@@ -30,5 +30,6 @@ public interface CarrosFacadeLocal {
 
     int count();
     
+    List<Carros> consultarTodosCarros();
     
 }
