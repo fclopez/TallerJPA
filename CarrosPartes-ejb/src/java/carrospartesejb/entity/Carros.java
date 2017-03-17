@@ -36,6 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Carros.findByColor", query = "SELECT c FROM Carros c WHERE c.color = :color")})
 public class Carros implements Serializable {
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "carros")
+    private Collection<PropietarioCarros> propietarioCarrosCollection;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -126,6 +129,15 @@ public class Carros implements Serializable {
     @Override
     public String toString() {
         return "carrospartesejb.entity.Carros[ placa=" + placa + " ]";
+    }
+
+    @XmlTransient
+    public Collection<PropietarioCarros> getPropietarioCarrosCollection() {
+        return propietarioCarrosCollection;
+    }
+
+    public void setPropietarioCarrosCollection(Collection<PropietarioCarros> propietarioCarrosCollection) {
+        this.propietarioCarrosCollection = propietarioCarrosCollection;
     }
     
 }

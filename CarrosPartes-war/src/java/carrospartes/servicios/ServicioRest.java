@@ -33,19 +33,29 @@ import javax.ejb.Stateless;
 @LocalBean
 public class ServicioRest {
 
-//    @Context
-//    private UriInfo context;
-
     @EJB
     private CarrosFacadeLocal gestionCarros;
     
+    /**
+     * Retrieves representation of an instance of
+     * carrospartes.servicios.ServicioRest
+     *
+     * @return an instance of java.lang.String
+     */
+
     @GET
-    @Path("/consultaCarros")
+    @Path("/consultaCarrosXML")
     @Produces(MediaType.APPLICATION_XML)
-    public List<Carros> buscarCarros(){
+    public List<Carros> buscarCarrosXML(){
         return gestionCarros.findAll();
     }
 
+    @GET
+    @Path("/consultaCarrosJSON")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Carros> buscarCarrosJSON(){
+        return gestionCarros.findAll();
+    }
     
     @GET
     /*Tipo de llamada*/
@@ -54,16 +64,6 @@ public class ServicioRest {
         /*Mostrará por pantalla el parámetro que le hemos pasado a la URL*/
         String output = "Test de parametros: " + msg;
         return Response.status(200).entity(output).build();
-    }
-    /**
-     * Retrieves representation of an instance of carrospartes.servicios.ServicioRest
-     * @return an instance of java.lang.String
-     */
-    @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public String getXml() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
     }
 
     /**
