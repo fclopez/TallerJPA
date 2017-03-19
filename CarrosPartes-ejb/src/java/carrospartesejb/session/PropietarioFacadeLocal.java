@@ -30,4 +30,6 @@ public interface PropietarioFacadeLocal {
 
     int count();
     
+    List<Propietario> consultaAllPropietario();
+    
 }

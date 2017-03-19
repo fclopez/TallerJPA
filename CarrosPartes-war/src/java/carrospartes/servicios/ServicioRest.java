@@ -5,22 +5,12 @@
  */
 package carrospartes.servicios;
 
-//import javax.ws.rs.core.Context;
-//import javax.ws.rs.core.UriInfo;
-import carrospartesejb.entity.Carros;
-import javax.ejb.EJB;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Produces;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PUT;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import carrospartesejb.session.CarrosFacadeLocal;
+import carrospartesejb.entity.*;
+import javax.ejb.*;
+import javax.ws.rs.*;
+import javax.ws.rs.core.*;
+import carrospartesejb.session.*;
 import java.util.List;
-import javax.ejb.LocalBean;
-import javax.ejb.Stateless;
 
 /**
  * REST Web Service
@@ -36,10 +26,13 @@ public class ServicioRest {
     @EJB
     private CarrosFacadeLocal gestionCarros;
     
+    @EJB
+    private PropietarioFacadeLocal propCarros;
+            
+    
     /**
      * Retrieves representation of an instance of
      * carrospartes.servicios.ServicioRest
-     *
      * @return an instance of java.lang.String
      */
 
@@ -56,6 +49,14 @@ public class ServicioRest {
     public List<Carros> buscarCarrosJSON(){
         return gestionCarros.findAll();
     }
+    
+    @GET
+    @Path("/consultaPropietariosJSON")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Propietario> buscarPropietariosJSON() {
+        return propCarros.findAll();
+    }
+    
     
     @GET
     /*Tipo de llamada*/

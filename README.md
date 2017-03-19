@@ -1,22 +1,22 @@
 # Taller JPA-EJB
+# Desarrollado por: Fabio Camilo López Castellanos
 
--------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------------------
 1- se crean las tablas en la db sample (por defecto en derby)
 2- se agrega las librerias de jersey en ~\TallerJPA\CarrosPartes-war\web\WEB-INF\jersey-bundle-1.19.1.jar
 3- se adiciona un servicio rest en ~\TallerJPA\CarrosPartes-war\src\java\carrospartes\servicios\ServicioRest.java
+4- se adiciona la inyeccion de dependencias con la anotación @EJB dentro del servicio rest
+5- se crea la peticion request consultaPropietariosJSON y consultaCarrosJSON
 
-
-
+URL de pruebas : http://localhost:8080/CarrosPartes-war/serviciorest/consultaPropietariosJSON
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------------------
--------------------------------------------------------------------------------------------------------------------------------------------
 
-/*
-	scrip usado para generar la DB
-*/
+
+# Scrip usado para generar la DB
+
 
 Create Table PARTES (
 CODIGO  varchar (6) NOT NULL PRIMARY KEY,
@@ -52,9 +52,7 @@ PRIMARY KEY(ID_PROPIETARIO,PLACA_CARRO)
 );
 
 
-/*
-	relaciones entre entidades
-*/
+# Relaciones entre entidades
 
 ALTER TABLE CARROS_PARTES ADD CONSTRAINT PLACA_FK
 Foreign Key (PLACA_CARRO) REFERENCES CARROS (PLACA);
